@@ -5,13 +5,21 @@ import (
 	"strings"
 )
 
-func getNetworkInformations() *NetworkInfo {
-	interfaces, _ := net.Interfaces()
+func getNetworkInformations() (*NetworkInfo, error) {
+	interfaces, err := net.Interfaces()
+
+	if err != nil {
+		return nil, err
+	}
 
 	for _, v := range interfaces {
 
 		if v.Flags&net.FlagLoopback == 0 && !strings.Contains(v.Name, "vir") {
-			addresses, _ := v.Addrs()
+			addresses, err := v.Addrs()
+
+			if err != nil {
+				return nil, err
+			}
 
 			for _, i := range addresses {
 
@@ -26,10 +34,10 @@ func getNetworkInformations() *NetworkInfo {
 				return &NetworkInfo{
 					IP:  ip,
 					MAC: v.HardwareAddr.String(),
-				}
+				}, nil
 			}
 		}
 	}
 
-	return nil
+	return nil, nil
 }

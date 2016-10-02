@@ -6,7 +6,11 @@ import (
 )
 
 func main() {
-	nInfo := getNetworkInformations()
+	nInfo, err := getNetworkInformations()
+
+	if err != nil {
+		panic(err)
+	}
 
 	tv := &TVInfo{
 		Model: os.Args[1],
@@ -14,7 +18,7 @@ func main() {
 	}
 
 	controller := NewSamsungController()
-	err := controller.Connect(nInfo, tv)
+	err = controller.Connect(nInfo, tv)
 
 	if err != nil {
 		panic(err)
