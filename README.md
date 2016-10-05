@@ -1,8 +1,10 @@
-# RTV: Remote control for TV (Samsung for now...)
+# RTV: Remote control for TV
+
+*Only supports Samsung Smart TVs for now, if you want to add support for another vendor, do not hesitate to fork this repo!*
 
 This is a simple application to control smart TVs via network. Based on the python script found here: http://deneb.homedns.org/things/?p=232.
 
-It will take your ip and mac addresses to communicate with the remote.
+It will takes your ip and mac addresses to communicate with the remote.
 
 ## Usage
 
